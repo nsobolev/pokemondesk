@@ -28,7 +28,7 @@ const MyHometask: MyHometaskInterface = {
 interface MyArrayHomework<T> {
 	[N: number]: T;
 
-	reduce<U>(fn: (ac: U, cv: T) => U ): U;
+	reduce<U>(fn: (ac: U, cv: T) => U, init: U): U;
 }
 
 
