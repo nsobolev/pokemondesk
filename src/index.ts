@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 import './index.less';
 
-import { App } from './App.jsx';
+import { App } from './App';
 
 const root = document.querySelector('#root');
 
-ReactDOM.render(<App />, root);
+ReactDOM.render(React.createElement(App), root);
