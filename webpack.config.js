@@ -13,10 +13,17 @@ module.exports = {
     filename: 'main.js',
   },
 
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/,
+    poll: 1000,
+  },
+
   devServer: {
     port: 3000,
     open: true,
     hot: true,
+    historyApiFallback: true,
   },
 
   devtool: isDevelopment ? 'source-map' : '',
@@ -31,7 +38,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          'style-loader', 
+          'style-loader',
           'css-modules-typescript-loader?modules',
           {
             loader: 'css-loader',
@@ -39,14 +46,22 @@ module.exports = {
               modules: {
                 mode: 'local',
                 localIdentName: '[name]__[local]_[hash:base64:5]',
-                auto: /\.module\.\w+$/i
-              }
-            }
+                auto: /\.module\.\w+$/i,
+              },
+            },
           },
           'less-loader',
         ],
-      }
-    ]
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'file-loader'],
+      },
+      {
+        test: /\.png|.woff|.woff2$/,
+        use: ['file-loader'],
+      },
+    ],
   },
 
   resolve: {
@@ -56,6 +71,6 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
-    })
-  ]
-}
+    }),
+  ],
+};

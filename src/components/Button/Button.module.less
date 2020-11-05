@@ -1,0 +1,40 @@
+@import '../../styles/_variables.less';
+
+/* eslint-disable camelcase */
+
+.button {
+  display: inline-flex;
+  padding: 15px 35px;
+  padding-bottom: 20px;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 600;
+  color: @color-text;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  cursor: pointer;
+
+  &_default {
+    background-color: @color-main;
+  }
+
+  &_success {
+    background-color: @color-success_light;
+    box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
+
+    &:hover {
+      background-color: darken(@color-success_light, 5%);
+    }
+
+    &:active {
+      color: @color-text_contrast;
+    }
+  }
+
+  &_danger {
+    background-color: @color-error;
+  }
+}

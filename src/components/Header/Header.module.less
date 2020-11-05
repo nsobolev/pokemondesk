@@ -1,0 +1,25 @@
+@import '../../styles/_variables.less';
+
+/* eslint-disable camelcase */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: @color-main_light;
+  box-shadow: 0px 4px 16px rgba(1, 28, 64, 0.2);
+
+  &__container {
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  &__logo {
+    margin-right: 30px;
+  }
+
+  &__menu {
+    margin-left: auto;
+  }
+}

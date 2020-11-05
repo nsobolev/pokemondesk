@@ -1,0 +1,19 @@
+@import '../../styles/_variables.less';
+
+/* eslint-disable camelcase */
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: @color-error;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    color: @color-text_contrast;
+  }
+}
