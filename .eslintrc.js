@@ -27,6 +27,7 @@ module.exports = {
       },
     ],
     'no-shadow': 'off',
+    'react/prop-types': 'off',
     '@typescript-eslint/no-shadow': ['error'],
   },
   settings: {

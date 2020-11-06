@@ -4,6 +4,7 @@ interface CssExports {
   button: string;
   button_danger: string;
   button_default: string;
+  button_small: string;
   button_success: string;
 }
 export const cssExports: CssExports;

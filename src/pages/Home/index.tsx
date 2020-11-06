@@ -14,7 +14,7 @@ const HomePage = () => {
               <p className={styles.home__description}>
                 You can know the type of Pokemon, its strengths, disadvantages and abilities
               </p>
-              <Button.ViewLink style={Button.StyleButtons.Success} to="/pokemons">
+              <Button.ViewLink color={Button.ColorsButton.Success} to="/pokemons">
                 See pokemons
               </Button.ViewLink>
             </div>
