@@ -58,7 +58,19 @@ module.exports = {
         use: ['@svgr/webpack', 'file-loader'],
       },
       {
-        test: /\.png|.woff|.woff2$/,
+        test: /\.woff|.woff2$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.png/,
         use: ['file-loader'],
       },
     ],

@@ -9,6 +9,7 @@ export enum ColorsButton {
 }
 
 export enum SizesButton {
+  Fluid,
   Small,
 }
 
@@ -62,6 +63,8 @@ const getSize = (size: SizesButton | undefined) => {
   switch (size) {
     case SizesButton.Small:
       return styles.button_small;
+    case SizesButton.Fluid:
+      return styles.button_fluid;
     default:
       return '';
   }
