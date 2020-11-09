@@ -3,7 +3,6 @@
 .button {
   display: inline-flex;
   padding: 15px 35px;
-  padding-bottom: 20px;
   font-size: 16px;
   line-height: 21px;
   font-weight: 600;
@@ -12,7 +11,7 @@
   background-color: transparent;
   border: none;
   border-radius: 10px;
-  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   cursor: pointer;
 
   &_default {
@@ -20,11 +19,14 @@
   }
 
   &_success {
+    box-sizing: border-box;
+    padding-bottom: 24px;
     background-color: @color-success_light;
     box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
 
     &:hover {
       background-color: darken(@color-success_light, 5%);
+      box-shadow: inset 0px -6px 0px rgba(0, 0, 0, 0.18);
     }
 
     &:active {
@@ -34,5 +36,22 @@
 
   &_danger {
     background-color: @color-error;
+  }
+
+  &_fluid {
+    width: 100%;
+    justify-content: center;
+  }
+
+  &_small {
+    padding: 7px 15px;
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: normal;
+  }
+
+  &_small&_success {
+    padding-bottom: 10px;
+    box-shadow: inset 0px -3px 0px rgba(0, 0, 0, 0.18);
   }
 }

@@ -5,10 +5,9 @@ interface CssExports {
   home__container: string;
   home__content: string;
   home__description: string;
-  home__image: string;
+  home__gallery: string;
   home__information: string;
   home__slogan: string;
-  home__wrapper: string;
 }
 export const cssExports: CssExports;
 export default cssExports;
