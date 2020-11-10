@@ -3,6 +3,8 @@
 .button {
   display: inline-flex;
   padding: 15px 35px;
+  padding-bottom: 24px;
+  box-sizing: border-box;
   font-size: 16px;
   line-height: 21px;
   font-weight: 600;
@@ -11,18 +13,25 @@
   background-color: transparent;
   border: none;
   border-radius: 10px;
+  box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   cursor: pointer;
 
   &_default {
     background-color: @color-main;
+
+    &:hover {
+      background-color: darken(@color-main, 5%);
+      box-shadow: inset 0px -6px 0px rgba(0, 0, 0, 0.18);
+    }
+
+    &:active {
+      color: @color-text_contrast;
+    }
   }
 
   &_success {
-    box-sizing: border-box;
-    padding-bottom: 24px;
     background-color: @color-success_light;
-    box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
 
     &:hover {
       background-color: darken(@color-success_light, 5%);

@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Link } from 'react-router-dom';
+import { A } from 'hookrouter';
 
 import styles from './Button.module.less';
 
@@ -30,9 +30,9 @@ type LinkProps = {
 
 export const ViewLink = ({ color, size, className, children, to }: PropsWithChildren<LinkProps>) => {
   return (
-    <Link className={`${styles.button} ${getColor(color)} ${getSize(size)} ${className}`} to={to}>
+    <A className={`${styles.button} ${getColor(color)} ${getSize(size)} ${className}`} href={to}>
       {children}
-    </Link>
+    </A>
   );
 };
 

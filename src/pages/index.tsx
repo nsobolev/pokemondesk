@@ -1,24 +1,52 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { useRoutes } from 'hookrouter';
 
 import HomePage from './Home';
 import PokemonsPage from './Pokemons';
 import NotFound from './NotFound';
 
+export type TMenu = {
+  title: string;
+  link: string;
+  component: () => JSX.Element;
+};
+
+type TAccMenu = {
+  [n: string]: () => JSX.Element;
+};
+
+export const menu: TMenu[] = [
+  {
+    title: 'Home',
+    link: '/',
+    component: () => <HomePage />,
+  },
+  {
+    title: 'Pokédex',
+    link: '/pokemons',
+    component: () => <PokemonsPage />,
+  },
+  {
+    title: 'Legendaries',
+    link: '/legendars',
+    component: () => <NotFound />,
+  },
+  {
+    title: 'Documentation',
+    link: '/documentation',
+    component: () => <NotFound />,
+  },
+];
+
+const routes = menu.reduce((acc: TAccMenu, item: TMenu) => {
+  acc[item.link] = item.component;
+  return acc;
+}, {});
+
 const Pages = () => {
-  return (
-    <Switch>
-      <Route path="/" exact>
-        <HomePage />
-      </Route>
-      <Route path="/pokemons">
-        <PokemonsPage />
-      </Route>
-      <Route path="*">
-        <NotFound />
-      </Route>
-    </Switch>
-  );
+  const match = useRoutes(routes);
+
+  return match || <NotFound />;
 };
 
 export default Pages;
