@@ -1,0 +1,13 @@
+@import '../../../styles/_mixins.less';
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    .column-mixin(2, 10px);
+  }
+}

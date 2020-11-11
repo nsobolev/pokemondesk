@@ -7,3 +7,24 @@
     font-display: swap;
   }
 }
+
+.column-mixin(@count, @margin) when (@count = 1) {
+  width: 100%;
+}
+
+.column-mixin(@count, @margin) when (@count > 1) {
+  width: ~'calc(' (100% / @count) ~' - ' ((@margin * (@count - 1)) / @count) ~')';
+}
+
+.column-mixin(@count, @margin) {
+  margin-top: @margin;
+  margin-right: @margin;
+
+  &:nth-child(@{count}n) {
+    margin-right: 0;
+  }
+
+  &:nth-child(-n + @{count}) {
+    margin-top: 0;
+  }
+}
