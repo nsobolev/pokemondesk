@@ -16,7 +16,7 @@ const PokemonStatList: FC<TPokemonStatListProps> = ({ stats }) => {
     <ul className={styles.list}>
       {Object.entries(stats).map(([name, count]: [string, number]) => {
         return (
-          <li className={styles.list__item}>
+          <li key={name} className={styles.list__item}>
             <PokemonStatRound name={name} count={count} />
           </li>
         );
