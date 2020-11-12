@@ -1,19 +1,32 @@
 import React from 'react';
 import PokemonList from '../../components/Pokemons/PokemonList';
-import { pokemons } from '../../components/Pokemons/data';
 
 import styles from './Pokemons.module.less';
+import { usePokemons } from '../../hooks';
+
+import Loader from '../../components/Common/Loader';
 
 const PokemonsPage = () => {
+  const { total, pokemons, isError, isLoading } = usePokemons();
+
+  if (isError) {
+    return <div>Error</div>;
+  }
+
   return (
     <div className={styles.pokemons}>
       <div className={`${styles.pokemons__container} container`}>
-        <h2 className={styles.pokemons__slogan}>800 Pokemons for you to choose your favorite</h2>
-        <div className={styles.pokemons__search}>Поиск</div>
-        <div className={styles.pokemons__filter}>Фильтры</div>
-        <div>
-          <PokemonList pokemons={pokemons} />
-        </div>
+        <Loader isLoading={isLoading}>
+          <>
+            <h2 className={styles.pokemons__slogan}>{total} Pokemons for you to choose your favorite</h2>
+            <div className={styles.pokemons__search}>Поиск</div>
+            <div className={styles.pokemons__filter}>Фильтры</div>
+            <div className={styles.pokemons__cards}>
+              <PokemonList pokemons={pokemons} />
+            </div>
+            <div>Навигация</div>
+          </>
+        </Loader>
       </div>
     </div>
   );
