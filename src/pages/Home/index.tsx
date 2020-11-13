@@ -5,6 +5,7 @@ import PokemonsImageUrl from './assets/main-background.png';
 
 import * as Button from '../../components/Button';
 import ParallaxImage from '../../components/ParallaxImage';
+import { LinksMenu } from '../index';
 
 const HomePage = () => {
   return (
@@ -16,7 +17,7 @@ const HomePage = () => {
             <p className={styles.home__description}>
               You can know the type of Pokemon, its strengths, disadvantages and abilities
             </p>
-            <Button.ViewLink color={Button.ColorsButton.Success} to="/pokemons">
+            <Button.ViewLink color={Button.ColorsButton.Success} to={LinksMenu.POKEDEX}>
               See pokemons
             </Button.ViewLink>
           </div>

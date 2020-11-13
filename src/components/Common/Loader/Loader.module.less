@@ -1,0 +1,58 @@
+@import '../../../styles/_variables.less';
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 5px;
+
+  &__container,
+  &__image {
+    width: 52px;
+    height: 52px;
+  }
+
+  &__container {
+    position: sticky;
+    top: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
+    background-color: @color-main_light;
+    border-radius: 15px;
+    transform: translateY(-50%);
+  }
+
+  &__animation {
+    animation-name: swing;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+}
+
+@keyframes swing {
+  20% {
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  40% {
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  60% {
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  80% {
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}

@@ -5,9 +5,16 @@ import HomePage from './Home';
 import PokemonsPage from './Pokemons';
 import NotFound from './NotFound';
 
+export enum LinksMenu {
+  HOME = '/',
+  POKEDEX = '/pokedex',
+  LEGENDARIES = '/legendars',
+  DOCUMENTATION = '/documentation',
+}
+
 export type TMenu = {
   title: string;
-  link: string;
+  link: LinksMenu;
   component: () => JSX.Element;
 };
 
@@ -18,22 +25,22 @@ type TAccMenu = {
 export const menu: TMenu[] = [
   {
     title: 'Home',
-    link: '/',
+    link: LinksMenu.HOME,
     component: () => <HomePage />,
   },
   {
     title: 'Pokédex',
-    link: '/pokemons',
+    link: LinksMenu.POKEDEX,
     component: () => <PokemonsPage />,
   },
   {
     title: 'Legendaries',
-    link: '/legendars',
+    link: LinksMenu.LEGENDARIES,
     component: () => <NotFound />,
   },
   {
     title: 'Documentation',
-    link: '/documentation',
+    link: LinksMenu.DOCUMENTATION,
     component: () => <NotFound />,
   },
 ];

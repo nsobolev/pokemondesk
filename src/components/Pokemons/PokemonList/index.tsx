@@ -3,11 +3,11 @@ import PokemonCard, { TPokemonCard } from '../PokemonCard';
 
 import styles from './PokemonList.module.less';
 
-type TPokemonListProps = {
+export type TPokemonList = {
   pokemons: TPokemonCard[];
 };
 
-const PokemonList: FC<TPokemonListProps> = ({ pokemons }) => {
+const PokemonList: FC<TPokemonList> = ({ pokemons }) => {
   return (
     <ul className={styles.list}>
       {pokemons.map((pokemon) => (
