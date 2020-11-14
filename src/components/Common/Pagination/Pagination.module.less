@@ -1,0 +1,50 @@
+@import '../../../styles/_variables.less';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  &__list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    min-width: 35px;
+    min-height: 35px;
+    padding: 9px;
+    font-size: 14px;
+    line-height: 17px;
+    color: @color-text;
+    border: none;
+    border-radius: 5px;
+    background-color: lighten(@color-main_light, 15%);
+    cursor: pointer;
+    transition: background-color 0.15s linear;
+
+    &:hover {
+      background-color: @color-main;
+    }
+
+    &_prev,
+    &_next {
+      min-width: 40px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
+}

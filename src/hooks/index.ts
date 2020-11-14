@@ -48,7 +48,9 @@ export const usePokemons = () => {
   useEffect(() => {
     const getPokemons = async () => {
       try {
-        const response = await fetch('http://zar.hosthot.ru/api/v1/pokemons');
+        const response = await fetch(
+          `http://zar.hosthot.ru/api/v1/pokemons?limit=${process.env.POKEMONS_LIMIT}&offset=1`,
+        );
         const result: TDataServer = await response.json();
 
         setData((state) => ({ ...state, total: result.total, pokemons: result.pokemons }));
@@ -63,4 +65,32 @@ export const usePokemons = () => {
   }, []);
 
   return data;
+};
+
+type TUsePagination = {
+  startCurrentPage?: number;
+  totalItems: number;
+  itemsPerPage: number;
+};
+
+export const usePagination = ({ startCurrentPage = 0, totalItems, itemsPerPage }: TUsePagination) => {
+  const initialCurrentPage = startCurrentPage;
+
+  const [currentPage, setCurrentPage] = useState(initialCurrentPage);
+  const maxPage = Math.ceil(totalItems / itemsPerPage);
+
+  const nextPage = () => {
+    setCurrentPage((pervCurrentPage) => Math.min(pervCurrentPage + 1, maxPage));
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prevCurrentPage) => Math.max(prevCurrentPage - 1, initialCurrentPage));
+  };
+
+  const jumpPage = (page: number) => {
+    const pageNumber = Math.max(initialCurrentPage, page);
+    setCurrentPage(() => Math.min(pageNumber, maxPage));
+  };
+
+  return { currentPage, maxPage, nextPage, prevPage, jumpPage };
 };

@@ -10,21 +10,27 @@
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 5px;
 
-  &__container,
+  &__container {
+    position: sticky;
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: translateY(-50%);
+  }
+
+  &__gallery,
   &__image {
     width: 52px;
     height: 52px;
   }
 
-  &__container {
-    position: sticky;
-    top: 50%;
-    margin-right: auto;
-    margin-left: auto;
+  &__gallery {
+    margin-bottom: 15px;
     padding: 15px;
     background-color: @color-main_light;
     border-radius: 15px;
-    transform: translateY(-50%);
   }
 
   &__animation {
@@ -32,6 +38,15 @@
     animation-iteration-count: infinite;
     animation-duration: 1s;
     animation-fill-mode: both;
+  }
+
+  &__description {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: @color-text_light;
   }
 }
 

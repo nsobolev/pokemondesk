@@ -5,6 +5,7 @@ import styles from './Pokemons.module.less';
 import { usePokemons } from '../../hooks';
 
 import Loader from '../../components/Common/Loader';
+import Pagination from '../../components/Common/Pagination';
 
 const PokemonsPage = () => {
   const { total, pokemons, isError, isLoading } = usePokemons();
@@ -24,7 +25,9 @@ const PokemonsPage = () => {
             <div className={styles.pokemons__cards}>
               <PokemonList pokemons={pokemons} />
             </div>
-            <div>Навигация</div>
+            <div>
+              <Pagination totalItems={total} itemsPerPage={Number(process.env.POKEMONS_LIMIT)} />
+            </div>
           </>
         </Loader>
       </div>

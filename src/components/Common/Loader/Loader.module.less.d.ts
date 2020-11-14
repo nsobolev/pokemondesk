@@ -4,6 +4,8 @@ interface CssExports {
   loader: string;
   loader__animation: string;
   loader__container: string;
+  loader__description: string;
+  loader__gallery: string;
   loader__image: string;
   swing: string;
 }

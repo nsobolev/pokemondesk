@@ -29,6 +29,8 @@
     "@typescript-eslint/parser": "^4.6.0",
     "css-loader": "^5.0.0",
     "css-modules-typescript-loader": "^4.0.1",
+    "dotenv-defaults": "^2.0.1",
+    "dotenv-webpack": "^5.1.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.15.0",
