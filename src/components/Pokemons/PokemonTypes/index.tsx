@@ -5,7 +5,7 @@ import styles from './PokemonTypes.module.less';
 
 export type TPokemonTypes = string[];
 
-type TPokemonTypesProps = {
+export type TPokemonTypesProps = {
   types: TPokemonTypes;
 };
 

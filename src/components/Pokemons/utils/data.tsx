@@ -1,0 +1,46 @@
+/* eslint-disable import/prefer-default-export */
+
+export const pokemons = [
+  {
+    name_clean: 'bulbasaur',
+    abilities: ['overgrow', 'chlorophyll'],
+    stats: {
+      hp: 45,
+      attack: 49,
+      defense: 49,
+      'special-attack': 65,
+      'special-defense': 65,
+      speed: 45,
+    },
+    types: ['grass', 'poison'],
+    img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
+    name: 'bulbasaur',
+    base_experience: 64,
+    height: 7,
+    id: 1,
+    is_default: true,
+    order: 1,
+    weight: 69,
+  },
+  {
+    name_clean: 'ivysaur',
+    abilities: ['overgrow', 'chlorophyll'],
+    stats: {
+      hp: 60,
+      attack: 62,
+      defense: 63,
+      'special-attack': 80,
+      'special-defense': 80,
+      speed: 60,
+    },
+    types: ['grass', 'poison'],
+    img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png',
+    name: 'ivysaur',
+    base_experience: 142,
+    height: 10,
+    id: 2,
+    is_default: true,
+    order: 2,
+    weight: 130,
+  },
+];

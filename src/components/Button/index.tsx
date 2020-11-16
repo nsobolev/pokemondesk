@@ -4,16 +4,16 @@ import { A } from 'hookrouter';
 import styles from './Button.module.less';
 
 export enum ColorsButton {
-  Danger,
-  Success,
+  Danger = 'Danger',
+  Success = 'Success',
 }
 
 export enum SizesButton {
-  Fluid,
-  Small,
+  Fluid = 'Fluid',
+  Small = 'Small',
 }
 
-type ButtonProps = {
+export type ButtonProps = {
   color?: ColorsButton;
   size?: SizesButton;
   className?: string;

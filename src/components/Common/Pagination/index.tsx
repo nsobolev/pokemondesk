@@ -4,7 +4,7 @@ import styles from './Pagination.module.less';
 
 import { usePagination } from '../../../hooks';
 
-type TPaginationProps = {
+export type TPaginationProps = {
   totalItems: number;
   itemsPerPage: number;
 };
