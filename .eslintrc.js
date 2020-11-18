@@ -28,7 +28,8 @@ module.exports = {
     ],
     'no-shadow': 'off',
     'react/prop-types': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
+    '@typescript-eslint/no-shadow': 'off',
+    'react/no-array-index-key': 'off',
   },
   settings: {
     'import/resolver': {

@@ -20,7 +20,7 @@ const PokemonStatList: FC<TPokemonStatListProps> = ({ stats, offset }) => {
       {list.map(([name, count]: [string, number], index) => {
         if (index < (offset || list.length)) {
           return (
-            <li key={name} className={styles.list__item}>
+            <li key={`${name}_${index}`} className={styles.list__item}>
               <PokemonStatRound name={name} count={count} />
             </li>
           );

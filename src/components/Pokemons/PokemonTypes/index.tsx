@@ -12,8 +12,8 @@ type TPokemonTypesProps = {
 const PokemonTypes: FC<TPokemonTypesProps> = ({ types }) => {
   return (
     <ul className={styles.list}>
-      {types.map((type) => (
-        <li key={type} className={styles.list__item}>
+      {types.map((type, index) => (
+        <li key={`${type}_${index}`} className={styles.list__item}>
           <Button.ViewButton size={Button.SizesButton.Small} color={Button.ColorsButton.Success}>
             {type}
           </Button.ViewButton>

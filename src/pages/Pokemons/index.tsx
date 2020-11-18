@@ -1,14 +1,19 @@
 import React from 'react';
 import PokemonList from '../../components/Pokemons/PokemonList';
+import SearchInput from '../../components/Common/SearchInput';
 
 import styles from './Pokemons.module.less';
-import { usePokemons } from '../../hooks';
+import { useData, useValue } from '../../hooks';
 
 import Loader from '../../components/Common/Loader';
-import Pagination from '../../components/Common/Pagination';
 
 const PokemonsPage = () => {
-  const { total, pokemons, isError, isLoading } = usePokemons();
+  const { value, setValue } = useValue('');
+  const { data, isError, isLoading } = useData(
+    'getPokemons',
+    { name: String(value), limit: String(process.env.POKEMONS_LIMIT) },
+    [value],
+  );
 
   if (isError) {
     return <div>Error</div>;
@@ -17,18 +22,17 @@ const PokemonsPage = () => {
   return (
     <div className={styles.pokemons}>
       <div className={`${styles.pokemons__container} container`}>
-        <Loader isLoading={isLoading}>
-          <>
-            <h2 className={styles.pokemons__slogan}>{total} Pokemons for you to choose your favorite</h2>
-            <div className={styles.pokemons__search}>Поиск</div>
-            <div className={styles.pokemons__filter}>Фильтры</div>
-            <div className={styles.pokemons__cards}>
-              <PokemonList pokemons={pokemons} />
-            </div>
-            <div>
-              <Pagination totalItems={total} itemsPerPage={Number(process.env.POKEMONS_LIMIT)} />
-            </div>
-          </>
+        <Loader isLoading={!data?.pokemons && isLoading}>
+          <h2 className={styles.pokemons__slogan}>{data?.total} Pokemons for you to choose your favorite</h2>
+          <div className={styles.pokemons__search}>
+            <SearchInput value={value} onChange={setValue} placeholder="Search pokemons" />
+          </div>
+          <div className={styles.pokemons__filter}>Фильтры</div>
+          <div className={styles.pokemons__cards}>
+            <Loader isLoading={Boolean(data?.pokemons) && isLoading} withContent>
+              <PokemonList pokemons={data?.pokemons} />
+            </Loader>
+          </div>
         </Loader>
       </div>
     </div>
