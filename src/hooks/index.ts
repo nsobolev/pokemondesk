@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TPokemonCard } from '../components/Pokemons/PokemonCard';
+import { request, TEndPoint, TQueryPoint } from '../config';
 
 /* eslint-disable import/prefer-default-export */
 
@@ -24,21 +24,14 @@ export const useScreenCursorCoordinates = () => {
 };
 
 type TInitialState = {
-  pokemons: TPokemonCard[];
-  total: number;
+  data: any;
   isError: boolean;
   isLoading: boolean;
 };
 
-type TDataServer = {
-  pokemons: TPokemonCard[];
-  total: number;
-};
-
-export const usePokemons = () => {
+export const useData = (endPoint: TEndPoint, query?: TQueryPoint, deps: any[] = []) => {
   const initialState: TInitialState = {
-    pokemons: [],
-    total: 0,
+    data: null,
     isError: false,
     isLoading: true,
   };
@@ -46,14 +39,13 @@ export const usePokemons = () => {
   const [data, setData] = useState(initialState);
 
   useEffect(() => {
-    const getPokemons = async () => {
+    const getData = async () => {
       try {
-        const response = await fetch(
-          `http://zar.hosthot.ru/api/v1/pokemons?limit=${process.env.POKEMONS_LIMIT}&offset=1`,
-        );
-        const result: TDataServer = await response.json();
+        setData((state) => ({ ...state, isLoading: true }));
 
-        setData((state) => ({ ...state, total: result.total, pokemons: result.pokemons }));
+        const result = await request(endPoint, query);
+
+        setData((state) => ({ ...state, data: result }));
       } catch {
         setData(() => ({ ...initialState, isError: true }));
       } finally {
@@ -61,10 +53,19 @@ export const usePokemons = () => {
       }
     };
 
-    getPokemons();
-  }, []);
+    getData();
+  }, deps);
 
   return data;
+};
+
+export type TInitialValue = string | number;
+
+export const useValue = (initialValue: TInitialValue) => {
+  const initialState = initialValue;
+  const [value, setValue] = useState(initialState);
+
+  return { value, setValue };
 };
 
 type TUsePagination = {
