@@ -15,15 +15,17 @@ enum GalleryBackground {
 type TRandomInteger = (min: number, max: number) => number;
 
 export type TPokemonCard = {
+  id: number;
   name: string;
   stats: TPokemonStatList;
   types: TPokemonTypes;
   img: string;
+  onClick?: (evt: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => void;
 };
 
-const PokemonCard: FC<TPokemonCard> = ({ name, img, stats, types }) => {
+const PokemonCard: FC<TPokemonCard> = ({ name, img, stats, types, onClick }) => {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick} onKeyPress={onClick} role="menuitem" tabIndex={0}>
       <div className={styles.card__info}>
         <h3 className={styles.card__slogan}>{name}</h3>
         <div className={styles.card__stats}>
@@ -38,6 +40,10 @@ const PokemonCard: FC<TPokemonCard> = ({ name, img, stats, types }) => {
       </div>
     </div>
   );
+};
+
+PokemonCard.defaultProps = {
+  onClick: () => {},
 };
 
 const getBackgroundColorGallery = (name: GalleryBackground | undefined) => {

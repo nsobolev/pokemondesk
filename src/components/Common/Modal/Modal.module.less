@@ -1,0 +1,46 @@
+@import '../../../styles/_variables.less';
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 30;
+  max-width: 900px;
+  max-height: 400px;
+  padding: 20px 30px;
+  background-color: @color-contrast;
+  box-shadow: 4px 4px 8px rgba(1, 28, 64, 0.2);
+  border-radius: 16px;
+  transform: translate(-50%, -50%);
+  outline: none;
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 25;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &__close {
+    position: absolute;
+    top: -45px;
+    right: 0;
+  }
+
+  &__closeButton {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background-color: red;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__content {
+    display: block;
+  }
+}

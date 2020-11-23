@@ -1,19 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+
 import PokemonList from '../../components/Pokemons/PokemonList';
+import PokemonModal from '../../components/Pokemons/PokemonModal';
 import SearchInput from '../../components/Common/SearchInput';
 
 import styles from './Pokemons.module.less';
 import { useData, useValue } from '../../hooks';
+import { LinksMenu } from '../index';
 
 import Loader from '../../components/Common/Loader';
 
-const PokemonsPage = () => {
+type TUseParams = {
+  id: string;
+};
+
+const PokemonsPage = React.memo(() => {
+  const history = useHistory();
+  const { id } = useParams<TUseParams>();
+
   const { value, setValue } = useValue('');
   const { data, isError, isLoading } = useData(
     'getPokemons',
     { name: String(value), limit: String(process.env.POKEMONS_LIMIT) },
     [value],
   );
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const showModal = () => {
+    setModalIsOpen((_) => true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen((_) => false);
+    history.push(LinksMenu.POKEDEX);
+  };
+
+  const onClickCard = (id: number) => {
+    history.push(`${LinksMenu.POKEDEX}/${id}`);
+    showModal();
+  };
 
   if (isError) {
     return <div>Error</div>;
@@ -30,13 +57,14 @@ const PokemonsPage = () => {
           <div className={styles.pokemons__filter}>Фильтры</div>
           <div className={styles.pokemons__cards}>
             <Loader isLoading={Boolean(data?.pokemons) && isLoading} withContent>
-              <PokemonList pokemons={data?.pokemons} />
+              <PokemonList pokemons={data?.pokemons} onClickAt={onClickCard} />
             </Loader>
           </div>
         </Loader>
       </div>
+      {modalIsOpen && id && <PokemonModal id={id} isOpen={modalIsOpen} setIsOpen={showModal} setIsClose={closeModal} />}
     </div>
   );
-};
+});
 
 export default PokemonsPage;

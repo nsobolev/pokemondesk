@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRoutes } from 'hookrouter';
+import { Route, Switch } from 'react-router-dom';
 
 import HomePage from './Home';
 import PokemonsPage from './Pokemons';
@@ -13,47 +13,56 @@ export enum LinksMenu {
 }
 
 export type TMenu = {
+  id: number;
   title: string;
-  link: LinksMenu;
-  component: () => JSX.Element;
-};
-
-type TAccMenu = {
-  [n: string]: () => JSX.Element;
+  linkMenu?: LinksMenu;
+  link: LinksMenu | string;
+  exact?: boolean;
+  component: JSX.Element;
 };
 
 export const menu: TMenu[] = [
   {
+    id: 1,
     title: 'Home',
+    linkMenu: LinksMenu.HOME,
     link: LinksMenu.HOME,
-    component: () => <HomePage />,
+    exact: true,
+    component: <HomePage />,
   },
   {
+    id: 2,
     title: 'Pokédex',
-    link: LinksMenu.POKEDEX,
-    component: () => <PokemonsPage />,
+    linkMenu: LinksMenu.POKEDEX,
+    link: `${LinksMenu.POKEDEX}/:id?`,
+    component: <PokemonsPage />,
   },
   {
+    id: 3,
     title: 'Legendaries',
+    linkMenu: LinksMenu.LEGENDARIES,
     link: LinksMenu.LEGENDARIES,
-    component: () => <NotFound />,
+    component: <NotFound />,
   },
   {
+    id: 4,
     title: 'Documentation',
+    linkMenu: LinksMenu.DOCUMENTATION,
     link: LinksMenu.DOCUMENTATION,
-    component: () => <NotFound />,
+    component: <NotFound />,
   },
 ];
 
-const routes = menu.reduce((acc: TAccMenu, item: TMenu) => {
-  acc[item.link] = item.component;
-  return acc;
-}, {});
-
 const Pages = () => {
-  const match = useRoutes(routes);
-
-  return match || <NotFound />;
+  return (
+    <Switch>
+      {menu.map((item) => (
+        <Route key={item.id} exact={item.exact} path={item.link}>
+          {item.component}
+        </Route>
+      ))}
+    </Switch>
+  );
 };
 
 export default Pages;

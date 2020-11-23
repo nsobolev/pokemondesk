@@ -1,23 +1,27 @@
 import React from 'react';
-import { A, usePath } from 'hookrouter';
+import { NavLink } from 'react-router-dom';
 
 import { menu, TMenu } from '../../pages/index';
 
 import styles from './Menu.module.less';
 
 const Menu = () => {
-  const path = usePath();
-
   return (
     <nav>
       <ul className={styles.menu__list}>
-        {menu.map(({ title, link }: TMenu) => (
-          <li className={styles.menu__item} key={title}>
-            <A className={`${styles.menu__link} ${link === path ? styles.menu__link_state_active : ''}`} href={link}>
-              {title}
-            </A>
-          </li>
-        ))}
+        {menu.map(({ title, linkMenu, exact }: TMenu) => {
+          return linkMenu ? (
+            <li className={styles.menu__item} key={title}>
+              <NavLink
+                className={styles.menu__link}
+                activeClassName={styles.menu__link_state_active}
+                to={linkMenu}
+                exact={exact}>
+                {title}
+              </NavLink>
+            </li>
+          ) : null;
+        })}
       </ul>
     </nav>
   );
