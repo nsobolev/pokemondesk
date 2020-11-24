@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import PokemonList from '../../components/Pokemons/PokemonList';
@@ -20,15 +20,23 @@ const PokemonsPage = React.memo(() => {
   const { id } = useParams<TUseParams>();
 
   const { value, setValue } = useValue('');
-  const { data, isError, isLoading } = useData(
-    'getPokemons',
-    { name: String(value), limit: String(process.env.POKEMONS_LIMIT) },
-    [value],
-  );
+  const { data, isError, isLoading } = useData({
+    endPoint: 'getPokemons',
+    query: { name: String(value), limit: String(process.env.POKEMONS_LIMIT) },
+    deps: [value],
+  });
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const showModal = () => {
+  useEffect(() => {
+    const pokemonId = parseInt(id, 10);
+    if (pokemonId) {
+      showModal(pokemonId);
+    }
+  }, [id]);
+
+  const showModal = (id: number) => {
+    history.push(`${LinksMenu.POKEDEX}/${id}`);
     setModalIsOpen((_) => true);
   };
 
@@ -38,8 +46,7 @@ const PokemonsPage = React.memo(() => {
   };
 
   const onClickCard = (id: number) => {
-    history.push(`${LinksMenu.POKEDEX}/${id}`);
-    showModal();
+    showModal(id);
   };
 
   if (isError) {
@@ -62,7 +69,7 @@ const PokemonsPage = React.memo(() => {
           </div>
         </Loader>
       </div>
-      {modalIsOpen && id && <PokemonModal id={id} isOpen={modalIsOpen} setIsOpen={showModal} setIsClose={closeModal} />}
+      {modalIsOpen && id && <PokemonModal id={id} isOpen={modalIsOpen} setIsClose={closeModal} />}
     </div>
   );
 });

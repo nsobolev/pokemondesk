@@ -4,8 +4,10 @@ interface CssExports {
   modal: string;
   modal__close: string;
   modal__closeButton: string;
+  modal__closeSvg: string;
   modal__content: string;
   modal__overlay: string;
+  modal_withoutPadding: string;
 }
 export const cssExports: CssExports;
 export default cssExports;

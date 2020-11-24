@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 
-import styles from './PokemonStatList.module.less';
+import classNames from 'classnames';
 import PokemonStatRound from '../PokemonStatRound';
+import styles from './PokemonStatList.module.less';
 
 export type TPokemonStatList = {
   [n: string]: number;
@@ -10,13 +11,14 @@ export type TPokemonStatList = {
 export type TPokemonStatListProps = {
   stats: TPokemonStatList;
   offset?: number;
+  isGridColumn?: boolean;
 };
 
-const PokemonStatList: FC<TPokemonStatListProps> = ({ stats, offset }) => {
-  const list = Object.entries(stats);
+const PokemonStatList: FC<TPokemonStatListProps> = ({ stats, offset, isGridColumn }) => {
+  const list = useMemo(() => Object.entries(stats), [stats]);
 
   return (
-    <ul className={styles.list}>
+    <ul className={classNames(styles.list, { [`${styles.list_column}`]: isGridColumn })}>
       {list.map(([name, count]: [string, number], index) => {
         if (index < (offset || list.length)) {
           return (
@@ -30,6 +32,10 @@ const PokemonStatList: FC<TPokemonStatListProps> = ({ stats, offset }) => {
       })}
     </ul>
   );
+};
+
+PokemonStatList.defaultProps = {
+  isGridColumn: false,
 };
 
 export default PokemonStatList;

@@ -3,11 +3,6 @@
 interface CssExports {
   card: string;
   card__gallery: string;
-  card__gallery_view_error: string;
-  card__gallery_view_info: string;
-  card__gallery_view_rose: string;
-  card__gallery_view_success: string;
-  card__gallery_view_warning: string;
   card__image: string;
   card__info: string;
   card__slogan: string;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { request, TEndPoint, TQueryPoint } from '../config';
+import { request, TRequestParams } from '../config';
 
 /* eslint-disable import/prefer-default-export */
 
@@ -29,7 +29,11 @@ type TInitialState = {
   isLoading: boolean;
 };
 
-export const useData = (endPoint: TEndPoint, query?: TQueryPoint, deps: any[] = []) => {
+type TUseDataProps = TRequestParams & {
+  deps: any[];
+};
+
+export const useData = ({ endPoint, pathname, query, deps = [] }: TUseDataProps) => {
   const initialState: TInitialState = {
     data: null,
     isError: false,
@@ -43,7 +47,7 @@ export const useData = (endPoint: TEndPoint, query?: TQueryPoint, deps: any[] = 
       try {
         setData((state) => ({ ...state, isLoading: true }));
 
-        const result = await request(endPoint, query);
+        const result = await request({ endPoint, query, pathname });
 
         setData((state) => ({ ...state, data: result }));
       } catch {

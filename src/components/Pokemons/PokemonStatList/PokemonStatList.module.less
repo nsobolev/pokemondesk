@@ -7,7 +7,16 @@
   padding: 0;
   list-style: none;
 
-  &__item {
+  &:not(&_column) &__item {
+    flex-grow: 1;
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &_column &__item {
     .column-mixin(2, 10px);
   }
 }

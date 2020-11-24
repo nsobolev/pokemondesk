@@ -1,0 +1,31 @@
+@import '../../../styles/_mixins.less';
+
+.characteristics {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    .column-mixin(2, 30px);
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  &__slogan,
+  &__value {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__slogan {
+    margin-bottom: 2px;
+    font-weight: normal;
+  }
+
+  &__value {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+}

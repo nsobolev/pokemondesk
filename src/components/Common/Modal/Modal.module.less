@@ -6,13 +6,17 @@
   left: 50%;
   z-index: 30;
   max-width: 900px;
-  max-height: 400px;
   padding: 20px 30px;
-  background-color: @color-contrast;
+  background-color: white;
   box-shadow: 4px 4px 8px rgba(1, 28, 64, 0.2);
   border-radius: 16px;
   transform: translate(-50%, -50%);
   outline: none;
+  transition: top 0.2s ease-in-out, bottom 0.2s ease-in-out;
+
+  &_withoutPadding {
+    padding: 0;
+  }
 
   &__overlay {
     position: fixed;
@@ -35,12 +39,31 @@
     width: 32px;
     height: 32px;
     padding: 0;
-    background-color: red;
+    background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &__closeSvg {
+    width: 32px;
+    height: 32px;
+    fill: @color-text;
+    transition: fill 0.3s ease-in-out;
+  }
+
+  &__closeButton:hover &__closeSvg {
+    fill: @color-main_dark;
   }
 
   &__content {
     display: block;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }

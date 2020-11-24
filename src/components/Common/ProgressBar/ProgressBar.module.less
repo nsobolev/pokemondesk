@@ -1,0 +1,30 @@
+@import '../../../styles/_variables.less';
+
+.progress {
+  width: 100%;
+
+  &__bar,
+  &__line {
+    height: 6px;
+    border-radius: 8px;
+  }
+
+  &__bar {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+  }
+
+  &__line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: @color-success;
+    transition: width 0.15s ease-in-out;
+
+    &_warning {
+      background-color: @color-main_light;
+    }
+  }
+}
