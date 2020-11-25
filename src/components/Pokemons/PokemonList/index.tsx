@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { forwardRef } from 'react';
 import PokemonCard, { TPokemonCard } from '../PokemonCard';
 
 import styles from './PokemonList.module.less';
@@ -8,9 +8,9 @@ export type TPokemonList = {
   onClickAt: (id: number) => void;
 };
 
-const PokemonList: FC<TPokemonList> = ({ pokemons, onClickAt }) => {
+const PokemonList = forwardRef<HTMLUListElement, TPokemonList>(({ pokemons, onClickAt }, ref) => {
   return (
-    <ul className={styles.list}>
+    <ul ref={ref} className={styles.list}>
       {pokemons.map((pokemon, index) => (
         <li key={`${pokemon.name}_${index}`} className={styles.list__item}>
           <PokemonCard
@@ -25,7 +25,7 @@ const PokemonList: FC<TPokemonList> = ({ pokemons, onClickAt }) => {
       ))}
     </ul>
   );
-};
+});
 
 PokemonList.defaultProps = {
   onClickAt: () => {},

@@ -6,13 +6,13 @@ import { TInitialValue } from '../../../hooks';
 type TSearchInput = {
   value: TInitialValue;
   placeholder?: string;
-  onChange: (callback: (prevState: TInitialValue) => TInitialValue) => void;
+  onChange: (value: string) => void;
 };
 
 const SearchInput: React.FC<TSearchInput> = ({ value, placeholder, onChange }) => {
   const handleInputOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = evt.target;
-    onChange(() => value);
+    onChange(value);
   };
 
   return (
