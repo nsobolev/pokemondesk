@@ -99,3 +99,19 @@ export const usePagination = ({ startCurrentPage = 0, totalItems, itemsPerPage }
 
   return { currentPage, maxPage, nextPage, prevPage, jumpPage };
 };
+
+export const useDebounce = <T>(props: T, delay: number) => {
+  const [debouncedProps, setDebouncedProps] = useState<T>(props);
+
+  useEffect(() => {
+    const time = setTimeout(() => {
+      setDebouncedProps((prevDebouncedProps) => ({ ...prevDebouncedProps, ...props }));
+    }, delay);
+
+    return () => {
+      clearTimeout(time);
+    };
+  }, [props]);
+
+  return debouncedProps;
+};
