@@ -16,8 +16,31 @@ type TUseParams = {
   id: string;
 };
 
+type TPokemonsData = {
+  id: number;
+  order: number;
+  weight: number;
+  height: number;
+  name: string;
+  name_clean: string;
+  base_experience: number;
+  is_default: boolean;
+  abilities: string[];
+  types: string[];
+  img: string;
+  stats: { [n: string]: number };
+};
+
+type TPokemonsRequest = {
+  count: number;
+  limit: number;
+  offset: number;
+  total: number;
+  pokemons: TPokemonsData[];
+};
+
 type TPokemonsState = {
-  pokemons: any[];
+  pokemons: TPokemonsData[];
   value: string;
   offset: number;
 };
@@ -31,7 +54,7 @@ const PokemonsPage = React.memo(() => {
     offset: 0,
   });
 
-  const { data, isError, isLoading } = useData({
+  const { data, isError, isLoading } = useData<TPokemonsRequest>({
     endPoint: 'getPokemons',
     query: { name: String(state.value), limit: String(process.env.POKEMONS_LIMIT), offset: String(state.offset) },
     deps: [state.value, state.offset],
@@ -39,7 +62,7 @@ const PokemonsPage = React.memo(() => {
 
   const infiniteListRef: React.RefObject<HTMLUListElement> = useInfiniteScroll({
     loading: isLoading,
-    hasNextPage: data?.offset < data?.total,
+    hasNextPage: Boolean(data && data.offset < data.total),
     onLoadMore: () =>
       setState((prevState) => ({ ...prevState, offset: prevState.offset + Number(process.env.POKEMONS_LIMIT) })),
   });
@@ -82,14 +105,14 @@ const PokemonsPage = React.memo(() => {
   return (
     <div className={styles.pokemons}>
       <div className={`${styles.pokemons__container} container`}>
-        <Loader isLoading={!data?.pokemons && isLoading}>
+        <Loader isLoading={Boolean(data && !data.pokemons) && isLoading}>
           <h2 className={styles.pokemons__slogan}>{data?.total} Pokemons for you to choose your favorite</h2>
           <div className={styles.pokemons__search}>
             <SearchInput value={state.value} onChange={setValue} placeholder="Search pokemons" />
           </div>
           <div className={styles.pokemons__filter}>Фильтры</div>
           <div className={styles.pokemons__cards}>
-            <Loader isLoading={Boolean(data?.pokemons) && isLoading} withContent>
+            <Loader isLoading={Boolean(data && data.pokemons) && isLoading} withContent>
               <PokemonList ref={infiniteListRef} pokemons={state.pokemons} onClickAt={onClickCard} />
             </Loader>
           </div>

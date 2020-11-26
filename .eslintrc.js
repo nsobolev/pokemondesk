@@ -30,6 +30,7 @@ module.exports = {
     'react/prop-types': 'off',
     '@typescript-eslint/no-shadow': 'off',
     'react/no-array-index-key': 'off',
+    camelcase: 'off',
   },
   settings: {
     'import/resolver': {

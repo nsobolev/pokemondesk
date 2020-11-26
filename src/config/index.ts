@@ -41,7 +41,7 @@ export const getUrlWithParamsConfig = ({ endPoint, pathname, query }: TRequestPa
   return url;
 };
 
-export const request = async ({ endPoint, pathname, query }: TRequestParams) => {
+export const request = async <T>({ endPoint, pathname, query }: TRequestParams): Promise<T> => {
   const url = getUrlWithParamsConfig({ endPoint, pathname, query });
 
   try {

@@ -23,8 +23,8 @@ export const useScreenCursorCoordinates = () => {
   return state;
 };
 
-type TInitialState = {
-  data: any;
+type TInitialState<D> = {
+  data: D | null;
   isError: boolean;
   isLoading: boolean;
 };
@@ -33,21 +33,21 @@ type TUseDataProps = TRequestParams & {
   deps: any[];
 };
 
-export const useData = ({ endPoint, pathname, query, deps = [] }: TUseDataProps) => {
-  const initialState: TInitialState = {
+export const useData = <T>({ endPoint, pathname, query, deps = [] }: TUseDataProps) => {
+  const initialState: TInitialState<T> = {
     data: null,
     isError: false,
     isLoading: true,
   };
 
-  const [data, setData] = useState(initialState);
+  const [data, setData] = useState<TInitialState<T>>(initialState);
 
   useEffect(() => {
-    const getData = async () => {
+    const getData = async (): Promise<void> => {
       try {
         setData((state) => ({ ...state, isLoading: true }));
 
-        const result = await request({ endPoint, query, pathname });
+        const result = await request<T>({ endPoint, query, pathname });
 
         setData((state) => ({ ...state, data: result }));
       } catch {
