@@ -74,11 +74,13 @@ const PokemonsPage = React.memo(() => {
     if (pokemonId) {
       showModal(pokemonId);
     }
+  }, [id]);
 
+  useEffect(() => {
     if (data?.pokemons) {
       setState((prevState) => ({ ...prevState, pokemons: [...state.pokemons, ...data.pokemons] }));
     }
-  }, [id, data?.pokemons]);
+  }, [data?.pokemons]);
 
   const showModal = (id: number) => {
     history.push(`${LinksMenu.POKEDEX}/${id}`);
@@ -105,7 +107,7 @@ const PokemonsPage = React.memo(() => {
   return (
     <div className={styles.pokemons}>
       <div className={`${styles.pokemons__container} container`}>
-        <Loader isLoading={Boolean(data && !data.pokemons) && isLoading}>
+        <Loader isLoading={Boolean(!data) && isLoading}>
           <h2 className={styles.pokemons__slogan}>{data?.total} Pokemons for you to choose your favorite</h2>
           <div className={styles.pokemons__search}>
             <SearchInput value={state.value} onChange={setValue} placeholder="Search pokemons" />
