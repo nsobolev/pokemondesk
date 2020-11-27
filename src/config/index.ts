@@ -33,7 +33,6 @@ export const config = {
 export const getUrlWithParamsConfig = ({ endPoint, pathname, query }: TRequestParams) => {
   const url = Url.format({
     ...config.client.server,
-    ...config.client.endpoint[endPoint].uri,
     pathname: `${config.client.server.pathname}${config.client.endpoint[endPoint].uri.pathname}${pathname || ''}`,
     query,
   });
